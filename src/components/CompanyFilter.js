@@ -23,6 +23,13 @@ const CompanyFilter = () => {
         [dispatch]
     );
 
+    const getCompanies = (comp) => {
+        dispatch({
+          type: "setCompanies",
+          payload: comp,
+        });
+    }
+
     useEffect(() => {
         let tM = [];
         if(selectedCompanies.length>0){
@@ -33,23 +40,44 @@ const CompanyFilter = () => {
         }
     }, [getShowTeamMembers, selectedCompanies, teamMembers])
 
-    let comp = [...selectedCompanies];
+    // let comp = [...selectedCompanies];
 
-    const handleSubCheckboxChange = (e, company) => {
-        if(e.target.checked){
-            comp.push(company)
-            getSelectedCompanies(comp);
-        }else{
-            comp = Array.from(new Set(comp.filter((it) => it !== company)))
-            getSelectedCompanies(comp);
-        }
-    }
+    // const handleSubCheckboxChange = (e, company) => {
+    //     if(e.target.checked){
+    //         comp.push(company)
+    //         getSelectedCompanies(comp);
+    //     }else{
+    //         comp = Array.from(new Set(comp.filter((it) => it !== company)))
+    //         getSelectedCompanies(comp);
+    //     }
+    // }
 
-    const handleMasterCheckboxChange = (e) => {
-        if(e.target.checked){
-            
+    let tempSelectedComp = [...selectedCompanies]
+
+    const handleChange = (e) => {
+        const { name, checked } = e.target;
+        let tempComp = companies.map((company) =>
+            name === "allSelect" || company.name === name
+            ? { ...company, isChecked: checked }
+            : company
+        );
+        let updatedSelectedComp;
+        if (name === "allSelect") {
+            updatedSelectedComp = checked
+            ? companies.map((company) => company.name)
+            : [];
+        } else {
+            const tempSelectedSet = new Set(tempSelectedComp);
+            checked ? tempSelectedSet.add(name) : tempSelectedSet.delete(name);
+            updatedSelectedComp = Array.from(tempSelectedSet);
         }
-    }
+        getSelectedCompanies(updatedSelectedComp);
+        getCompanies(tempComp);
+    };
+
+    // Later in your component:
+    // let tempSelectedComp = [...selectedCompanies];
+
 
     return (
       <div className='dropdown'>
@@ -58,7 +86,9 @@ const CompanyFilter = () => {
           <div>
             <input
               type='checkbox'
-              onChange={(event) => handleMasterCheckboxChange(event)}
+              name='allSelect'
+              checked={companies.filter((company) => company?.isChecked !== true).length < 1}
+              onChange={handleChange}
             />
             <span>Select All</span>
           </div>
@@ -67,7 +97,9 @@ const CompanyFilter = () => {
               <div key={company.name}>
                 <input
                   type='checkbox'
-                //   onChange={(event) => handleSubCheckboxChange(event, company)}
+                  name={company.name}
+                  checked={company.isChecked || false}
+                  onChange={handleChange}
                 />
                 <span>{company.name}</span>
               </div>
@@ -79,3 +111,7 @@ const CompanyFilter = () => {
 }
 
 export default CompanyFilter
+
+
+
+

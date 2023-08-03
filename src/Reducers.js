@@ -47,9 +47,10 @@ export const customReducer = createReducer(initialState, {
     state.status = action.payload;
   },
   setCompanies: (state, action) => {
-    state.companies = Array.from(
-      new Set([...action.payload])
-    );
+    state.companies = [...action.payload]
+    // Array.from(
+    //   new Set([...action.payload])
+    // );
   },
   setShow: (state, action) => {
     state.show = action.payload;
