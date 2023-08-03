@@ -21,7 +21,7 @@ body {
 }
 
 .modal-content{
-  width: 50%;
+  width: 70%;
   background-color: white;
   padding-left: 1rem;
   display: flex;
@@ -167,4 +167,33 @@ tbody td:nth-child(7n) span{
 
 th, td {
   padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  /* Adjustments for smaller screens */
+  .modal-content {
+    width: 90%; /* Adjust the width as needed */
+  }
+  
+  .modal-close, .modal-footer {
+    margin: 0.5rem; /* Increase spacing for better touch interaction */
+  }
+  
+  .input-fields {
+    margin-right: 0; /* Reset margin to conserve space */
+  }
+  
+  .filters {
+    flex-direction: column; /* Stack filters vertically on small screens */
+  }
+  
+  .dropdown, .sort {
+    margin: 0.5rem 0; /* Adjust spacing for better touch interaction */
+  }
+  
+  table {
+    font-size: 0.9rem; /* Reduce font size for better readability */
+  }
+  
+  /* ... other adjustments as needed ... */
 }
