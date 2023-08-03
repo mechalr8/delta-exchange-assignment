@@ -21,7 +21,7 @@ body {
 }
 
 .modal-content{
-  width: 70%;
+  width: 50%;
   background-color: white;
   padding-left: 1rem;
   display: flex;
