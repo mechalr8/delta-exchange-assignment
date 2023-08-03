@@ -1,16 +1,15 @@
 import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import TeamMembers from "./TeamMembers";
 
 const Modal = () => {
   const { show, teamMembers } = useSelector((state) => state.custom);
 
   const dispatch = useDispatch();
 
-  const [name, setName] = useState()
-  const [company, setCompany] = useState()
-  const [status, setStatus] = useState()
-  const [notes, setNotes] = useState()  
+  const [name, setName] = useState("")
+  const [company, setCompany] = useState("")
+  const [status, setStatus] = useState("")
+  const [notes, setNotes] = useState("")  
 
   const getShow = (notShowing) => {
     dispatch({
@@ -37,7 +36,8 @@ const Modal = () => {
       notes
     }
     tm.push(newTeamMember);
-    getTeamMembers(tm);
+    localStorage.setItem("tM", JSON.stringify(tm));
+    getTeamMembers(JSON.parse(localStorage.getItem("tM")))
     closeModalHandler()
   }
 

@@ -1,38 +1,39 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  teamMembers: [
-    {
-        id: 1,
-      name: "Wayne Rooney",
-      company: "DC United",
-      status: "Active",
-      lastUpdated: "7/07/2023",
-      notes: "ManUtd Highest Scorer",
-    },
-    {
-        id: 2,
-      name: "Ryan Giggs",
-      company: "Manchester United",
-      status: "Closed",
-      lastUpdated: "3/08/2011",
-      notes: "Most Matches Played",
-    },
-    {
-        id: 3,
-      name: "Zlatan Ibrahmovic",
-      company: "LA Galaxy",
-      status: "Active",
-      lastUpdated: "3/09/2018",
-      notes: "I am 'ZLATAN'",
-    },
-  ],
+  teamMembers: (JSON.parse(localStorage.getItem("tM")) || []),
+  //   [
+  //     {
+  //         id: 1,
+  //       name: "Wayne Rooney",
+  //       company: "DC United",
+  //       status: "Active",
+  //       lastUpdated: "7/07/2023",
+  //       notes: "ManUtd Highest Scorer",
+  //     },
+  //     {
+  //         id: 2,
+  //       name: "Ryan Giggs",
+  //       company: "Manchester United",
+  //       status: "Closed",
+  //       lastUpdated: "3/08/2011",
+  //       notes: "Most Matches Played",
+  //     },
+  //     {
+  //         id: 3,
+  //       name: "Zlatan Ibrahmovic",
+  //       company: "LA Galaxy",
+  //       status: "Active",
+  //       lastUpdated: "3/09/2018",
+  //       notes: "I am 'ZLATAN'",
+  //     },
+  //   ]
   showTeamMembers: [],
   status: "",
   companies: [],
   show: false,
   selectedCompanies: [],
-  user: localStorage.getItem("token")
+  user: localStorage.getItem("token"),
 };
 
 export const customReducer = createReducer(initialState, {
