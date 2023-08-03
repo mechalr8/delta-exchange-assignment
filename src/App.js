@@ -1,19 +1,22 @@
 import './App.css';
-import AddMember from './components/AddMember';
-import Modal from './components/Modal';
-import TeamMembers from './components/TeamMembers';
+import { Route, Routes } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import SigninPage from './pages/SigninPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <div className='App'>
-      <div className='app-header'>
-        <h2 className='title'>Team Members</h2>
-        <AddMember />
-      </div>
-      <hr/>
-      <TeamMembers/>
-      <Modal />
-    </div>
+    <Routes>
+      <Route path='/signin' element={<SigninPage />} />
+      <Route
+        path='/'
+        element={
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
 

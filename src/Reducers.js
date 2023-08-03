@@ -32,6 +32,7 @@ const initialState = {
   companies: [],
   show: false,
   selectedCompanies: [],
+  user: localStorage.getItem("token")
 };
 
 export const customReducer = createReducer(initialState, {
@@ -48,9 +49,6 @@ export const customReducer = createReducer(initialState, {
   },
   setCompanies: (state, action) => {
     state.companies = [...action.payload]
-    // Array.from(
-    //   new Set([...action.payload])
-    // );
   },
   setShow: (state, action) => {
     state.show = action.payload;
@@ -58,4 +56,7 @@ export const customReducer = createReducer(initialState, {
   setSelectedCompanies: (state, action) => {
     state.selectedCompanies = Array.from(new Set(([...action.payload])));
   },
+  setUser: (state, action) => {
+    state.user = action.payload
+  }
 });
